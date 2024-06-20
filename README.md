@@ -6,4 +6,4 @@ Data Contributors: Theresa M. Laverty, Debbie C. Buecher, David C. Dalton, Mallo
 ## Folders
 __data__ - Contains raw data files and R scripts for handling data
 
-__Figures__ - Contains timeline figure for paper (Figure 1c)
+__figures__ - Contains timeline figure for paper (Figure 1c)
