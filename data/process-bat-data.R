@@ -157,11 +157,11 @@ newdata2$readsite[newdata2$readsite=="gitana"] <- "sierra_cacachilas"
 newdata2$readsite[newdata2$readsite=="chivato"] <- "sierra_cacachilas"
 newdata2$tagsite[newdata2$tagsite=="gitana"] <- "sierra_cacachilas"
 newdata2$tagsite[newdata2$tagsite=="chivato"] <- "sierra_cacachilas"
-newdata2$readsite[newdata2$readsite=="fort_huachuca"] <- "huachuaca"
-newdata2$readsite[newdata2$readsite=="coronado"] <- "huachuaca"
-newdata2$tagsite[newdata2$tagsite=="fort_huachuca"] <- "huachuaca"
-newdata2$tagsite[newdata2$tagsite=="coronado"] <- "huachuaca"
-newdata2$tagsite[newdata2$tagsite=="huachuca_3_F"] <- "huachuaca"
+newdata2$readsite[newdata2$readsite=="fort_huachuca"] <- "huachuca"
+newdata2$readsite[newdata2$readsite=="coronado"] <- "huachuca"
+newdata2$tagsite[newdata2$tagsite=="fort_huachuca"] <- "huachuca"
+newdata2$tagsite[newdata2$tagsite=="coronado"] <- "huachuca"
+newdata2$tagsite[newdata2$tagsite=="huachuca_3_F"] <- "huachuca"
 
 #continue renaming some readsites/tagsites
 df <- newdata2
@@ -169,9 +169,7 @@ df$readsite_plot <- plyr::mapvalues(df$readsite, from = c("big_hatchet", "pelonc
 df$readsite_plot <- factor(df$readsite_plot, levels=c('Big Hatchet', 'Peloncillo', 'Tucson', 'Huachuca','Organ Pipe Cactus Nat. Monument', 'Pinacate', 'Mariana', 'Navachiste', 'Carmen', 'Sierra de las Cacachilas', 'Don Panchito', 'Atoyac'))
 levels(df$readsite_plot)
 
-df$tagsite_plot <- plyr::mapvalues(df$tagsite, from = c("big_hatchet", "peloncillo_1_F", "huachuca","organ_pipe","pinacate","mariana", "navachiste","carmen", "sierra_cacachilas", "don_panchito"), to = c('Big Hatchet', 'Peloncillo', 'Huachuca','Organ Pipe Cactus Nat. Monument', 'Pinacate', 'Mariana', 'Navachiste', 'Carmen', 'Sierra de las Cacachilas', 'Don Panchito'))
-df$tagsite_plot[df$tagsite_new=="huachuca_5_F"] <- "Huachuca"
-df$tagsite_plot[df$tagsite_new=="organ_pipe_1_h2o"] <- "Organ Pipe Cactus Nat. Monument"
+df$tagsite_plot <- plyr::mapvalues(df$tagsite, from = c("big_hatchet", "peloncillo_1_F", "huachuca","huachuca_5_F","organ_pipe","organ_pipe_1_h2o","pinacate","mariana", "navachiste","carmen", "sierra_cacachilas", "don_panchito"), to = c('Big Hatchet', 'Peloncillo', 'Huachuca','Huachuca','Organ Pipe Cactus Nat. Monument','Organ Pipe Cactus Nat. Monument', 'Pinacate', 'Mariana', 'Navachiste', 'Carmen', 'Sierra de las Cacachilas', 'Don Panchito'))
 df$tagsite_plot <- factor(df$tagsite_plot, levels=c('Big Hatchet', 'Peloncillo', 'Tucson', 'Huachuca','Organ Pipe Cactus Nat. Monument', 'Mariana', 'Pinacate', 'Navachiste', 'Carmen', 'Sierra de las Cacachilas', 'Don Panchito', 'Atoyac'))
 levels(df$tagsite_plot)
 
