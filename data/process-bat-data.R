@@ -3,7 +3,7 @@
 ############## Script by: Theresa M. Laverty ##############
 ################ Contact: tlaverty@nmsu.edu ###############
 ###########################################################
-############ Date Last Modified: 23-June-2024 #############
+############ Date Last Modified: 29-June-2024 #############
 ###########################################################
 
 #Clear work environment
@@ -42,7 +42,7 @@ tagged_bats$id[duplicated(tagged_bats$id)]
 #Read in PIT tag reader data
 #Subsetted to reads from only those bats that displayed movements >178 km
 tag_reads <- read.csv("raw-reader-data/PITtagreads.csv", header=T)
-nrow(tag_reads) #77608 
+nrow(tag_reads) #85054 
 length(unique(tag_reads$id)) #84 bats
 
 #read in distances between roosts
@@ -140,7 +140,7 @@ View(maxdist)
 
 #filter to movements > 178 km
 bigdist2 <- test_all%>%group_by(id)%>%filter(distance_km>178)
-nrow(bigdist2) #115 movements of >178km
+nrow(bigdist2) #117 movements of >178km
 length(unique(bigdist2$id)) #made by 84 individuals
 View(bigdist2)
 
@@ -317,8 +317,8 @@ huac <- huac[!duplicated(huac$date),]
 #2021-09-07
 #2022-04-07 to 2022-10-10
 #2023-05-25 to 2024-01-11 (north adit appeared to stop working around 2023-08-10)
-#2023-03-07 to present (issues at south adit)
-#Last download was: 2024-05-16
+#2023-03-07 to present (occasional issues at south adit)
+#Last download was: 2024-06-20
 orpi <- data.frame(date = c(seq(as.Date("2018-08-06"), as.Date("2018-08-07"), by="days"),
                              as.Date("2018-08-21"),
                              as.Date("2019-05-09"),
@@ -334,7 +334,7 @@ orpi <- data.frame(date = c(seq(as.Date("2018-08-06"), as.Date("2018-08-07"), by
                              as.Date("2021-09-07"),
                              seq(as.Date("2022-04-07"), as.Date("2022-10-10"), by="days"),
                              seq(as.Date("2023-05-25"), as.Date("2024-01-11"), by="days"),
-                             seq(as.Date("2024-03-07"), as.Date("2024-05-16"), by="days")),
+                             seq(as.Date("2024-03-07"), as.Date("2024-06-20"), by="days")),
                     id ="E",
                     tagdate = as.Date("2013-07-01"),
                     readsite = NA,
@@ -349,10 +349,12 @@ orpi <- orpi[,c(2,1,3,4,5,6,7,8,9,10)]
 #2021-05-22 to 2021-09-14
 #2022-05-08 to 2022-09-18
 #2023-05-15 to 2023-05-18 (reader failure this season)
-#last download was 2023-10-30
+#2024-06-16 to 2024-06-18
+#last download was 2024-06-18
 pin <- data.frame(date = c(seq(as.Date("2021-05-22"), as.Date("2021-09-14"), by="days"),
                            seq(as.Date("2022-05-08"), as.Date("2022-09-18"), by="days"),
-                           seq(as.Date("2023-05-15"), as.Date("2023-05-18"), by="days")),
+                           seq(as.Date("2023-05-15"), as.Date("2023-05-18"), by="days"),
+                           seq(as.Date("2024-06-16"), as.Date("2024-06-18"), by="days")),
                   id = "F",
                   tagdate = as.Date("2013-06-01"),
                   readsite = NA,
@@ -600,7 +602,7 @@ timelines <- df3%>%
   guides(color = guide_legend(override.aes = list(size = .3)))+
   scale_shape_manual(values = c(4,16), breaks= c("Tagged", "Detected"))+ 
   scale_colour_manual(values = MyPalette, breaks= names(MyPalette))+
-  scale_x_date(limit=c(as.Date("2015-01-01"),as.Date("2024-06-01")))+
+  scale_x_date(limit=c(as.Date("2015-01-01"),as.Date("2024-06-20")))+
   theme(axis.text.y=element_blank(),
         axis.ticks.y=element_blank(),
         panel.border = element_blank(),
