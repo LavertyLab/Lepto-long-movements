@@ -7,7 +7,7 @@ Tagging data (taggedLeptos.csv) includes information from bat captures and taggi
 ## Reader data
 Due to data sensitivity concerns, roost locations have been withheld, but distances between relevant roosts have been provided (roostdistance.csv). Additionally, given the size of our raw data files, we have only provided PIT tag reader data for the tagged bats that have made long-distance movements (PITtagreads.csv). 
 
-##Code
+## Code
 R script (process-bat-data.R) contains the code needed for generating Figure 1d.
 
 Citations:
