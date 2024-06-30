@@ -64,7 +64,7 @@ newdata$detect <- 1
 
 #format date columns
 newdata$date <- as.Date(newdata$date)
-newdata$tagdate <- as.Date(newdata$tagdate, format = "%m/%d/%Y")
+newdata$tagdate <- as.Date(newdata$tagdate, format = "%m/%d/%y")
 #order by date and time
 newdata <- newdata[order(newdata$date, newdata$time),]
 
