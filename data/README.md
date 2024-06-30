@@ -7,5 +7,8 @@ Tagging data (taggedLeptos.csv) includes information from bat captures and taggi
 ## Reader data
 Due to data sensitivity concerns, roost locations have been withheld, but distances between relevant roosts have been provided (roostdistance.csv). Additionally, given the size of our raw data files, we have only provided PIT tag reader data for the tagged bats that have made long-distance movements (PITtagreads.csv). 
 
+##Code
+R script (process-bat-data.R) contains the code needed for generating Figure 1d.
+
 Citations:
 Goldshtein, A., M. Handel, O. Eitan, A. Bonstein, T. Shaler, S. Collet, S. Greif, R. A. Medellín, Y. Emek, and A. Korman. 2020. Reinforcement learning enables resource partitioning in foraging bats. Current Biology 30:4096–4102.
