@@ -3,7 +3,7 @@
 ############## Script by: Theresa M. Laverty ##############
 ################ Contact: tlaverty@nmsu.edu ###############
 ###########################################################
-############ Date Last Modified: 29-June-2024 #############
+########## Date Last Modified: 06-December-2024 ###########
 ###########################################################
 
 #Clear work environment
@@ -42,8 +42,8 @@ tagged_bats$id[duplicated(tagged_bats$id)]
 #Read in PIT tag reader data
 #Subsetted to reads from only those bats that displayed movements >178 km
 tag_reads <- read.csv("raw-reader-data/PITtagreads.csv", header=T)
-nrow(tag_reads) #85054 
-length(unique(tag_reads$id)) #84 bats
+nrow(tag_reads) #75003 
+length(unique(tag_reads$id)) #92 bats
 
 #read in distances between roosts
 distances <- read.csv("raw-reader-data/distances_km.csv", header=T)
@@ -104,7 +104,7 @@ test_all <- test_all[order(test_all$tagsite, test_all$tagdate, test_all$grp),]
 test_all <- (test_all %>% group_by(id) %>% mutate(lag_n = lag(readsite, n=1, default = NA)))
 #reorder by tagsite and tagdate and grp
 test_all <- test_all[order(test_all$tagsite, test_all$tagdate, test_all$grp),]
-length(unique(test_all$id)) #84 bats
+length(unique(test_all$id)) #92 bats
 
 #bring in distance information
 #build pairwise distance dataframe for tagsites
@@ -140,8 +140,8 @@ View(maxdist)
 
 #filter to movements > 178 km
 bigdist2 <- test_all%>%group_by(id)%>%filter(distance_km>178)
-nrow(bigdist2) #117 movements of >178km
-length(unique(bigdist2$id)) #made by 84 individuals
+nrow(bigdist2) #125 movements of >178km
+length(unique(bigdist2$id)) #made by 92 individuals
 View(bigdist2)
 
 #look at time it takes to make movements
@@ -189,8 +189,8 @@ df2 <- df %>%
 #determine number of males and females
 df2%>%group_by(id)%>%slice(1)%>%group_by(sex)%>%summarize(N=n())
 #make labels for males and females for facet_grid
-df2$sex[df2$sex=="female"] <- "Female\n(n = 68)"
-df2$sex[df2$sex=="male"] <- "Male\n(n = 16)"
+df2$sex[df2$sex=="female"] <- "Female\n(n = 74)"
+df2$sex[df2$sex=="male"] <- "Male\n(n = 18)"
 #name Event for legend
 df2$Event <- factor(df2$Event, levels=c('Tagged', 'Detected'))
 levels(df2$Event)
@@ -201,8 +201,8 @@ levels(df2$Event)
 ##############################################
 
 #big hatchet was active all days since 2017-08-14
-#last download was 2023-10-30
-bigh <- data.frame(date = seq(as.Date("2017-08-14"), as.Date("2023-10-30"), by="days"),
+#last download was 2024-09-07
+bigh <- data.frame(date = seq(as.Date("2017-08-14"), as.Date("2024-09-07"), by="days"),
                   id = "A",
                   tagdate = as.Date("2013-11-01"),
                   readsite = NA,
@@ -223,8 +223,9 @@ bigh <- bigh[,c(2,1,3,4,5,6,7,8,9,10)]
 #2020-09-02 to 2020-11-20
 #2021-09-03 to 2021-11-08
 #2022-08-19 to 2022-12-15
-#2023-08-03 to 
-#Last download was 2024-01-12
+#2023-08-03 to 2024-01-12
+#2024-05-13 to
+#Last download was 2024-08-23
 rin <- data.frame(date = c(as.Date("2014-09-20"),
                            seq(as.Date("2015-08-27"), as.Date("2015-11-15"), by="days"),
                            seq(as.Date("2016-08-25"), as.Date("2016-12-03"), by="days"),
@@ -234,7 +235,8 @@ rin <- data.frame(date = c(as.Date("2014-09-20"),
                            seq(as.Date("2020-09-02"), as.Date("2020-11-20"), by="days"),
                            seq(as.Date("2021-09-03"), as.Date("2021-11-08"), by="days"),
                            seq(as.Date("2022-08-19"), as.Date("2022-12-15"), by="days"),
-                           seq(as.Date("2023-08-03"), as.Date("2024-01-12"), by="days")),
+                           seq(as.Date("2023-08-03"), as.Date("2024-01-12"), by="days"),
+                           seq(as.Date("2024-05-13"), as.Date("2024-08-23"), by="days")),
                   id ="B",
                   tagdate = as.Date("2013-10-01"),
                   readsite = NA,
@@ -253,8 +255,9 @@ rin <- rin[,c(2,1,3,4,5,6,7,8,9,10)]
 #2020-07-02 to 2020-12-13
 #2021-07-07 to 2021-10-14
 #2022-07-14 to 2022-11-14
-#2023-06-26 to 2023-11-16
-#Last download was 2023-11-16
+#2023-06-26 to 2023-10-09
+#2024-05-22 to 2024-10-29
+#Last download was 2024-10-29
 coro <- data.frame(date = c(seq(as.Date("2016-08-08"), as.Date("2016-11-30"), by="days"),
                            seq(as.Date("2017-07-03"), as.Date("2017-11-25"), by="days"),
                            seq(as.Date("2018-07-01"), as.Date("2018-11-29"), by="days"),
@@ -262,7 +265,8 @@ coro <- data.frame(date = c(seq(as.Date("2016-08-08"), as.Date("2016-11-30"), by
                            seq(as.Date("2020-07-02"), as.Date("2020-12-13"), by="days"),
                            seq(as.Date("2021-07-07"), as.Date("2021-10-14"), by="days"),
                            seq(as.Date("2022-07-14"), as.Date("2022-11-14"), by="days"),
-                           seq(as.Date("2023-06-26"), as.Date("2023-11-16"), by="days")),
+                           seq(as.Date("2023-06-26"), as.Date("2023-10-09"), by="days"),
+                           seq(as.Date("2024-05-22"), as.Date("2024-10-29"), by="days")),
                   id ="C",
                   tagdate = as.Date("2013-09-01"),
                   readsite = NA,
@@ -316,7 +320,7 @@ huac <- huac[!duplicated(huac$date),]
 #2022-04-07 to 2022-10-10
 #2023-05-25 to 2024-01-11 (north adit appeared to stop working around 2023-08-10)
 #2023-03-07 to present (occasional issues at south adit)
-#Last download was: 2024-06-20
+#Last download was: 2024-09-05
 orpi <- data.frame(date = c(seq(as.Date("2018-08-06"), as.Date("2018-08-07"), by="days"),
                              as.Date("2018-08-21"),
                              as.Date("2019-05-09"),
@@ -332,7 +336,7 @@ orpi <- data.frame(date = c(seq(as.Date("2018-08-06"), as.Date("2018-08-07"), by
                              as.Date("2021-09-07"),
                              seq(as.Date("2022-04-07"), as.Date("2022-10-10"), by="days"),
                              seq(as.Date("2023-05-25"), as.Date("2024-01-11"), by="days"),
-                             seq(as.Date("2024-03-07"), as.Date("2024-06-20"), by="days")),
+                             seq(as.Date("2024-03-07"), as.Date("2024-09-05"), by="days")),
                     id ="E",
                     tagdate = as.Date("2013-07-01"),
                     readsite = NA,
@@ -347,12 +351,12 @@ orpi <- orpi[,c(2,1,3,4,5,6,7,8,9,10)]
 #2021-05-22 to 2021-09-14
 #2022-05-08 to 2022-09-18
 #2023-05-15 to 2023-05-18 (reader failure this season)
-#2024-06-16 to 2024-06-18
-#last download was 2024-06-18
+#2024-06-16 to 2024-10-04
+#last download was 2024-10-04
 pin <- data.frame(date = c(seq(as.Date("2021-05-22"), as.Date("2021-09-14"), by="days"),
                            seq(as.Date("2022-05-08"), as.Date("2022-09-18"), by="days"),
                            seq(as.Date("2023-05-15"), as.Date("2023-05-18"), by="days"),
-                           seq(as.Date("2024-06-16"), as.Date("2024-06-18"), by="days")),
+                           seq(as.Date("2024-06-16"), as.Date("2024-10-04"), by="days")),
                   id = "F",
                   tagdate = as.Date("2013-06-01"),
                   readsite = NA,
@@ -364,8 +368,8 @@ pin <- data.frame(date = c(seq(as.Date("2021-05-22"), as.Date("2021-09-14"), by=
                   Event = "Detected")
 pin <- pin[,c(2,1,3,4,5,6,7,8,9,10)]
 #navachiste was active all days since 2017-08-14
-#last download was 2024-03-30
-nav <- data.frame(date = seq(as.Date("2022-02-25"), as.Date("2024-03-30"), by="days"),
+#last download was 2024-10-19
+nav <- data.frame(date = seq(as.Date("2022-02-25"), as.Date("2024-10-19"), by="days"),
                   id = "G",
                   tagdate = as.Date("2013-05-01"),
                   readsite = NA,
@@ -594,13 +598,13 @@ timelines <- df3%>%
   geom_point(data = . %>% filter(Event=="Detected") %>% filter(readsite_plot!=tagsite_plot)%>%
                mutate(id = fct_reorder(id, as.numeric(tagdate))),
              aes(color=readsite_plot), size=1, shape=16)+
-  geom_point(data=data.frame(date=as.Date("2015-01-01"), id="*989001000315515", sex="Female\n(n = 68)"), size=1.5, shape=8, colour="#66C2A5")+
+  geom_point(data=data.frame(date=as.Date("2015-01-01"), id="*989001000315515", sex="Female\n(n = 74)"), size=1.5, shape=8, colour="#66C2A5")+
   facet_grid(sex~., scales = "free", space = "free")+
   guides(shape = guide_legend(override.aes = list(size = .3)))+
   guides(color = guide_legend(override.aes = list(size = .3)))+
   scale_shape_manual(values = c(4,16), breaks= c("Tagged", "Detected"))+ 
   scale_colour_manual(values = MyPalette, breaks= names(MyPalette))+
-  scale_x_date(limit=c(as.Date("2015-01-01"),as.Date("2024-06-20")))+
+  scale_x_date(limit=c(as.Date("2015-01-01"),as.Date("2024-10-30")))+
   theme(axis.text.y=element_blank(),
         axis.ticks.y=element_blank(),
         panel.border = element_blank(),
@@ -620,3 +624,64 @@ timelines
 ggsave(paste0(homewd,"figures/Figure1d.tiff"), width=9.2, height=6.5, units="in")
 
 
+#################################################
+# CREATE TABLES & RESULTS ASSOCIATED WITH PAPER #
+#################################################
+
+#create a table (Appendix S1: Table S3) summarizing the long-distance movements in Fig. 1d 
+xx <- bigdist2 %>% 
+  group_by(distance_km, places) %>% 
+  summarize(n_movements=n(), n_individuals=length(unique(id)))
+xx[c("origin", "destination")] <- do.call(rbind, strsplit(xx$places, "-"))
+#remove places
+yy <- xx[,c(5,6,3,4,1)]
+yy$distance_km <- round(yy$distance_km,digits=1)
+View(yy)
+write.csv(yy,paste0(homewd,"outputs/TableS3.csv"), row.names = F)
+
+#####
+#investigate PIT tag loss in lesser long-nosed bats from Pinacate
+#read in data
+pintags <- read.csv(paste0(homewd,"data/tag-loss/pinacate_tag_loss.csv"), header=T)
+pintags$retrieval_date<- as.Date(pintags$retrieval_date,format="%m/%d/%Y")
+#merge recovered tags from Pinacate with tagged bats list
+pintagsmerged <- merge(pintags,tagged_bats, by="id", all.x = T)
+unique(pintagsmerged$tagsite) #all tagged at pinacate
+unique(pintagsmerged$id[pintagsmerged$id %in%bigdist2$id]) #none of these are long-distance movers
+length(unique(tagged_bats$id[tagged_bats$tagsite=="pinacate"])) #792 bats tagged at pinacate
+length(unique(pintags$id)) #32 bats with recovered or recorded dropped tags
+length(unique(pintags$id))/length(unique(tagged_bats$id[tagged_bats$tagsite=="pinacate"]))*100 #4.0% tag loss
+
+
+#####
+#figure out longest time a tag was detected among long-distance movement bats
+all_master$tagdate<- as.Date(all_master$tagdate, format="%m/%d/%y")
+all_master %>% 
+  group_by(id) %>% 
+  mutate(detection_time=difftime(date, tagdate, units = "days")) %>% 
+  summarise(max_detection_time=max(detection_time)) %>%
+  arrange(desc(max_detection_time)) %>% #3353.25 days
+  mutate(detection_time_yr=max_detection_time/365.25) #9.2 years
+
+#####
+#create a table (Appendix S1: Table S4) summarizing the proportion of bats tagged at sites with PIT tag readers 
+#that were detected anywhere
+#read in data
+detbats <- read.csv(paste0(homewd, "data/raw-tagging-data/tags_w_detections_monitoredroosts.csv"), header=T)
+#calculate how many bats tagged at locations with PIT tag readers were detected anywhere (sorted by tagging site)
+detected <- tagged_bats[tagged_bats$id %in% detbats$id,] %>%
+  group_by(tagsite) %>%
+  summarize(detected= n_distinct(id)) %>%
+  filter(tagsite!="mariana")
+#calculate how many bats were tagged at each site with PIT tag readers
+tagged <- tagged_bats[tagged_bats$tagsite %in% detected$tagsite,] %>%
+  group_by(tagsite) %>%
+  summarize(tagged= n_distinct(id)) 
+#merge the two calculations above and determine the percentage (divide detected by tagged and multiply by 100%)
+(tagdet <- merge(tagged, detected)%>%
+  mutate(detection_percent= round(detected/tagged*100,digits=1)))
+write.csv(tagdet, paste0(homewd,"outputs/TableS4.csv"), row.names = F)
+
+########################################################
+######################### END ##########################
+########################################################
