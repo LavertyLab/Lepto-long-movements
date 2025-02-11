@@ -1,5 +1,8 @@
 ###########################################################
-############ Determine long-distance movements ############
+### Code for: Long-haul flights and migratory routes of ###
+################## a nectar-feeding bat ###################
+################### Accepted by: Ecology ################## 
+###########################################################
 ############## Script by: Theresa M. Laverty ##############
 ################ Contact: tlaverty@nmsu.edu ###############
 ###########################################################
@@ -9,11 +12,17 @@
 #Clear work environment
 rm(list=ls())
 
+#Note: If you opened this script through the .Rproj file, the only line you should 
+#need to change for the script to run (assuming packages are installed) is the 
+#homewd directory on line 20 
+
+#Set home working directory
+#Set wd to data folder on your local computer. Also direct to homewd, which
+#should be wherever "Lepto-long-movements" is stored on your computer. For example:
+#homewd = "/Users/tlaverty/Desktop/R/R_repositories/Lepto-long-movements/" 
+homewd = "<insert your folder here and end with a forward slash as in the example above>"
 #Set working directory
-# Set wd to data on this computer. Also direct to homewd
-#should be wherever "Lepto-long-movements" is stored on your computer
-homewd = "/Users/tlaverty/Desktop/R/R_repositories/Lepto-long-movements/" 
-setwd(paste0(homewd, "/", "data/"))
+setwd(paste0(homewd, "data/"))
 
 #View additional digits (for inspecting PIT tag numbers)
 options(digits = 15)
@@ -58,7 +67,8 @@ head(all_master)
 #order by date and time of tag read
 newdata_all <- all_master[order(all_master$date, all_master$time),]
 #filter to relevant columns
-newdata <- newdata_all[,c('id', 'date','time', 'readsite', 'tagsite', 'tagdate', 'sex', 'reproductive_status','age')]
+newdata <- newdata_all[,c('id', 'date','time', 'readsite', 'tagsite', 'tagdate', 
+                          'sex', 'reproductive_status','age')]
 #add in a detect column
 newdata$detect <- 1
 
@@ -165,7 +175,7 @@ newdata2$tagsite[newdata2$tagsite=="huachuca_3_F"] <- "huachuca"
 
 #continue renaming some readsites/tagsites
 df <- newdata2
-df$readsite_plot <- plyr::mapvalues(df$readsite, from = c("big_hatchet", "peloncillo_1_F", "rincon","huachuca","organ_pipe","pinacate", "mariana", "navachiste","carmen", "sierra_cacachilas","don_panchito","atoyac"), to = c('Big Hatchet', 'Peloncillo', 'Tucson', 'Huachuca','Organ Pipe Cactus Nat. Monument', 'Pinacate', 'Mariana', 'Navachiste', 'Carmen', 'Sierra de las Cacachilas', 'Don Panchito', 'Atoyac'))
+df$readsite_plot <- plyr::mapvalues(df$readsite, from = c("big_hatchet", "peloncillo_1_F", "rincon","huachuca","organ_pipe","pinacate", "mariana", "navachiste","carmen", "sierra_cacachilas","don_panchito","atoyac"), to = c('Big Hatchet', 'Peloncillo', 'Tucson', 'Huachuca','Organ Pipe Cactus Nat. Monument', 'Pinacate', 'Mariana', 'Navachiste', 'Carmen', 'Sierra de las Cacachilas', 'Don Panchito', 'Atoyac')) #okay to ignore error
 df$readsite_plot <- factor(df$readsite_plot, levels=c('Big Hatchet', 'Peloncillo', 'Tucson', 'Huachuca','Organ Pipe Cactus Nat. Monument', 'Pinacate', 'Mariana', 'Navachiste', 'Carmen', 'Sierra de las Cacachilas', 'Don Panchito', 'Atoyac'))
 levels(df$readsite_plot)
 
@@ -583,7 +593,7 @@ df2i <- rbind(df2h,don)
 df3 <- rbind(df2i,ato) 
 
 ##############################################
-################PLOT TIMELINES################
+############### PLOT TIMELINES ###############
 ##############################################
 
 #plot the timeline for Figure 1d
@@ -600,7 +610,7 @@ timelines <- df3%>%
              aes(color=readsite_plot), size=1, shape=16)+
   geom_point(data=data.frame(date=as.Date("2015-01-01"), id="*989001000315515", sex="Female\n(n = 74)"), size=1.5, shape=8, colour="#66C2A5")+
   facet_grid(sex~., scales = "free", space = "free")+
-  guides(shape = guide_legend(override.aes = list(size = .3)))+
+  #guides(shape = guide_legend(override.aes = list(size = .3)))+
   guides(color = guide_legend(override.aes = list(size = .3)))+
   scale_shape_manual(values = c(4,16), breaks= c("Tagged", "Detected"))+ 
   scale_colour_manual(values = MyPalette, breaks= names(MyPalette))+
