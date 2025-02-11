@@ -13,5 +13,5 @@ Tags recovered or detected on the floor of Pinacate cave are listed in a spreads
 ## Code
 R script (process-bat-data.R) contains the code needed for generating Figure 1d, Table S3, and Table S4. We also include tag loss calculations for lesser long-nosed bats from Pinacate Cave and determining maximum length of time between tagging and last detection among bats that have made long-distance movements.
 
-## Literature Cited:
+## Literature Cited
 Goldshtein, A., M. Handel, O. Eitan, A. Bonstein, T. Shaler, S. Collet, S. Greif, R. A. Medellín, Y. Emek, and A. Korman. 2020. Reinforcement learning enables resource partitioning in foraging bats. Current Biology 30:4096–4102.
